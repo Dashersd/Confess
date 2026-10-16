@@ -230,6 +230,8 @@
   flex-direction: column;
   justify-content: flex-start;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 183, 197, 0.5) transparent;
 }
