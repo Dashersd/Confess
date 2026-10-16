@@ -13,7 +13,6 @@ const AppContent = () => {
   const [yesStep, setYesStep] = useState('initial'); // 'initial', 'held', 'promised'
   const [introLineIdx, setIntroLineIdx] = useState(0);
   const [showIntroButtons, setShowIntroButtons] = useState(false);
-  const [bunnyActive, setBunnyActive] = useState(false);
   const [confessionLineIdx, setConfessionLineIdx] = useState(0);
   const [activeConfessionLines, setActiveConfessionLines] = useState([]);
   const [confessionPeak, setConfessionPeak] = useState(false);
@@ -33,40 +32,50 @@ const AppContent = () => {
   ];
 
   const confessionScript = [
-    "I've been wanting to tell you something for a while now, but I kept talking myself out of it.",
-    "I guess I was afraid of making things awkward or saying the wrong thing.",
-    "But I don't want to keep keeping it to myself anymore.",
-    "Somewhere along the way, you became someone really important to me.",
-    "I honestly don't know when it started.",
-    "Maybe it was our conversations.",
-    "Maybe it was how I'd always check my phone hoping to see a message from you.",
-    "Maybe it was all the little moments we've shared, even if they've only been through a screen.",
-    "All I know is that before I realized it, I started looking forward to talking to you more than I should have.",
-    "You became someone I genuinely care about.",
-    "And the truth is...",
-    "I like you.",
-    "I like talking to you.",
-    "I like the way you think.",
-    "I like how easy it is to be myself when we're chatting.",
-    "You can make me smile without even trying, and some of the best parts of my day are the conversations I have with you.",
-    "I've felt this way for a while now, but I didn't want to keep wondering what would happen if I never told you.",
-    "So this is me being completely honest.",
-    "I like you.",
-    "And I know we're still getting to know each other.",
-    "I'm not expecting you to feel the same way right now.",
-    "I'm not asking for an answer today.",
-    "And I definitely don't want you to feel pressured.",
-    "I just wanted you to know how I feel.",
-    "If you need time, that's okay.",
-    "If you're unsure, that's okay too.",
-    "Because feelings don't always grow at the same pace.",
-    "And if it takes time, I'm okay with that.",
-    "You're someone I think is worth being patient for.",
-    "No matter what your answer is, I'm really glad we met, and I'm glad you're part of my life.",
-    "I just didn't want to hide this from you anymore.",
-    "So there it is.",
-    "I like you.",
-    "And if one day you happen to feel the same way, I'll be here."
+    "To the Girl Who Has Stayed in My Heart for Three Years,",
+    "Hi, baby. ❤️",
+    "There’s something I’ve been wanting to tell you for a very long time, something I’ve kept in my heart since the day we first met online three years ago.",
+    "It's funny how someone you’ve never met in person can become someone so special to you.",
+    "We’ve never stood in front of each other, never had the chance to look into each other’s eyes in real life, and never shared the kind of moments that most people would consider the beginning of something beautiful.",
+    "Yet, somehow, you became someone I couldn’t easily forget.",
+    "I never planned to fall for you. It just happened.",
+    "Maybe it was the way we talked, the way your presence made my days feel a little lighter, or the simple happiness I felt whenever I got the chance to hear from you.",
+    "I don't know exactly when my feelings started growing, but I know that somewhere along the way, you became more than just a girl I met online.",
+    "You became someone I genuinely cared about.",
+    "Three years have passed, and a lot of things have changed since then.",
+    "There were words I wanted to say but never had the courage to express, feelings I kept to myself because I didn't know how you would receive them, and moments when I wondered what would have happened if I had been honest with you from the very beginning.",
+    "Maybe I was afraid of changing what we had.",
+    "Maybe I was afraid that telling you how I felt would make things different between us.",
+    "So, instead of saying everything I wanted to say, I kept those feelings quietly in my heart.",
+    "But today, I want you to know.",
+    "I like you. I really do.",
+    "And it's not because I have created some perfect image of you in my mind.",
+    "I know that talking online doesn't mean I know every part of who you are.",
+    "There are still so many things about you that I have yet to discover, stories I haven't heard, and moments we haven't shared.",
+    "But the feelings I have for you are genuine, and I would love the chance to know you more, beyond the screens that have kept us apart.",
+    "I don't know what you feel about me, and I don't want you to feel pressured to give me an answer or to feel the same way just because I'm finally telling you this.",
+    "I'm not writing this letter because I expect something in return.",
+    "I simply want to be honest with you about something that has been a part of my heart for the past three years.",
+    "If there's one thing I wish for, it's the chance to meet you someday.",
+    "To finally see the person behind the voice and the messages that have become so familiar to me.",
+    "To share a conversation without a screen between us and create memories that we can look back on someday.",
+    "I don't know when that day will come, but it's something I quietly hope for.",
+    "Until then, I'm grateful that our paths crossed, even if it was only through a screen.",
+    "Out of all the people I could have met, somehow, I met you.",
+    "And even though I never expected to develop feelings for someone I hadn't met in person, here I am, three years later, still wanting you to know how much you've come to mean to me.",
+    "Thank you for being you.",
+    "Thank you for the conversations, the little moments, and for being there.",
+    "You might not realize how much those simple things have meant to me, but they have stayed with me longer than you might imagine.",
+    "I don't know what the future holds for us.",
+    "Maybe our paths will bring us closer, or maybe life will take us in different directions.",
+    "Whatever happens, I don't regret meeting you, and I don't regret the feelings I've developed for you.",
+    "Because sometimes, the most unexpected people leave the deepest impressions on our hearts, even before we ever get the chance to meet them.",
+    "And you, baby, are one of those people for me.",
+    "I just wanted you to know that somewhere, three years ago, a boy met a girl online, and without ever meeting her in person, he found himself falling for her.",
+    "That boy was me.",
+    "And this letter is everything I wish I had told you back then.",
+    "With all my sincerity,",
+    "The boy who fell for you three years ago. ❤️"
   ];
 
   const handleMouseMove = useCallback((e) => {
@@ -155,7 +164,7 @@ const AppContent = () => {
         setConfessionLineIdx(nextIdx);
         setActiveConfessionLines(prev => [...prev, nextLine]);
 
-        if (nextLine === "I like you.") {
+        if (nextLine === "I like you. I really do." || nextLine === "I like you.") {
           setConfessionPeak(true);
           playBgm();
           playSfx('sfx_heartbeat', 0.25);
@@ -282,12 +291,6 @@ const AppContent = () => {
           {showIntroButtons && (
             <div className="button-row fade-in" style={{ marginTop: '3rem', opacity: 0, animation: 'fadeIn 1s 1s forwards' }}>
               <button onClick={handleOpenOption}>💌 Open the letter</button>
-              <button onClick={() => setBunnyActive(true)}>🌸 Wait a little</button>
-            </div>
-          )}
-          {bunnyActive && (
-            <div className="bunny-friend fade-in">
-              🐰 <span style={{ fontSize: '0.9rem', color: '#bd8e62', fontStyle: 'italic' }}>That’s okay… I’ll stay here with you.</span>
             </div>
           )}
         </div>
@@ -314,14 +317,21 @@ const AppContent = () => {
                   text={line}
                   speed={35}
                   onComplete={idx === confessionLineIdx ? handleTypeComplete : null}
-                  className={line === "I like you." ? "accent-line" : ""}
+                  className={
+                    line === "I like you. I really do." ||
+                    line === "I like you." ||
+                    line === "That boy was me." ||
+                    line.startsWith("To the Girl Who Has Stayed") ||
+                    line.startsWith("The boy who fell for you")
+                      ? "accent-line"
+                      : ""
+                  }
                 />
               ))}
             </div>
             {confessionLineIdx === confessionScript.length - 1 && (
               <div className="button-row fade-in" style={{ marginTop: '1.5rem', opacity: 0, animation: 'fadeIn 1.5s forwards' }}>
                 <button onClick={handleYes}>💖 Yes... I feel it too</button>
-                <button onClick={handleTime}>🌙 I need a little time</button>
               </div>
             )}
           </div>
